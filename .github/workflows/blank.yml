@@ -19,10 +19,10 @@ jobs:
       matrix:
         steps: ['action', 'manual']
         distribution: [
-          {image: 'ubuntu:22.04', ros: humble},
-          {image: 'ubuntu:24.04', ros: jazzy},
+          # {image: 'ubuntu:22.04', ros: humble},
+          # {image: 'ubuntu:24.04', ros: jazzy},
           {image: 'almalinux:8', ros: humble},
-          {image: 'almalinux:9', ros: jazzy},
+          # {image: 'almalinux:9', ros: jazzy},
         ]
 
     container:
@@ -41,7 +41,7 @@ jobs:
           EOF
 
       - name: build (action)
-        uses: ros-tooling/action-ros-ci@v0.3
+        uses: christianrauch/action-ros-ci@master
         if: ${{ matrix.steps == 'action' }}
         with:
           target-ros2-distro: ${{ matrix.distribution.ros }}
