@@ -47,6 +47,7 @@ jobs:
           target-ros2-distro: ${{ matrix.distribution.ros }}
           no-symlink-install: true
           vcs-repo-file-url: sources.repos
+          skip-tests: true
 
       - name: build (manual)
         if: ${{ matrix.steps == 'manual' }}
