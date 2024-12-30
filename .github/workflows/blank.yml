@@ -62,4 +62,5 @@ jobs:
           vcs import --input sources.repos
           rosdep install --from-paths src --ignore-src -y --rosdistro ${{ matrix.distribution.ros }}
           . /opt/ros/${{ matrix.distribution.ros }}/setup.sh
+          env
           colcon build --event-handlers=console_cohesion+ --packages-up-to examples_rclcpp_minimal_publisher
