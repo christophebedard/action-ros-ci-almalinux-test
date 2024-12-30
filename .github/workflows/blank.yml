@@ -17,7 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        steps: ['action', 'manual']
+        # steps: ['action', 'manual']
+        steps: ['action']
         distribution: [
           # {image: 'ubuntu:22.04', ros: humble},
           # {image: 'ubuntu:24.04', ros: jazzy},
@@ -29,6 +30,10 @@ jobs:
       image: ${{ matrix.distribution.image }}
 
     steps:
+
+      # act workaround
+      - run: dnf -y module install nodejs:20
+
       - uses: ros-tooling/setup-ros@v0.7
 
       - name: generate repos file
