@@ -17,8 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # steps: ['action', 'manual']
-        steps: ['action']
+        steps: ['action', 'manual']
         distribution: [
           # {image: 'ubuntu:22.04', ros: humble},
           # {image: 'ubuntu:24.04', ros: jazzy},
@@ -40,15 +39,17 @@ jobs:
         run: |
           cat << EOF > sources.repos
           repositories:
-            src/apriltag_ros:
+            src/examples:
               type: git
-              url: https://github.com/christianrauch/apriltag_ros.git
+              url: https://github.com/ros2/examples.git
+              version: humble
           EOF
 
       - name: build (action)
         uses: christianrauch/action-ros-ci@master
         if: ${{ matrix.steps == 'action' }}
         with:
+          package-name: examples_rclcpp_minimal_publisher
           target-ros2-distro: ${{ matrix.distribution.ros }}
           no-symlink-install: true
           vcs-repo-file-url: sources.repos
@@ -61,4 +62,4 @@ jobs:
           vcs import --input sources.repos
           rosdep install --from-paths src --ignore-src -y --rosdistro ${{ matrix.distribution.ros }}
           . /opt/ros/${{ matrix.distribution.ros }}/setup.sh
-          colcon build --event-handlers=console_cohesion+
+          colcon build --event-handlers=console_cohesion+ --packages-up-to examples_rclcpp_minimal_publisher
