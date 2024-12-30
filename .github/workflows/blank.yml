@@ -35,6 +35,8 @@ jobs:
 
       - uses: ros-tooling/setup-ros@v0.7
 
+      - run: dnf -y install ros-humble-ros-base
+
       - name: generate repos file
         run: |
           cat << EOF > sources.repos
