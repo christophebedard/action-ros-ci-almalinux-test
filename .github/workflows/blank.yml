@@ -34,8 +34,8 @@ jobs:
       - run: dnf -y module install nodejs:20
 
       - uses: ros-tooling/setup-ros@v0.7
-
-      - run: dnf -y install ros-humble-ros-base
+        with:
+          required-ros-distributions: humble
 
       - name: generate repos file
         run: |
