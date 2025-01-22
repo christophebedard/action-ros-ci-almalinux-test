@@ -47,6 +47,10 @@ jobs:
               version: humble
           EOF
 
+      # https://github.com/colcon/colcon-core/pull/684
+      - run: |
+          pip3 install git+https://github.com/colcon/colcon-core.git@cottsay/null-sep-env --upgrade
+
       - name: build (action)
         uses: ros-tooling/action-ros-ci@christophebedard/rhel-debug
         if: ${{ matrix.steps == 'action' }}
