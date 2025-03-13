@@ -48,7 +48,7 @@ jobs:
           EOF
 
       - name: build (action)
-        uses: christianrauch/action-ros-ci@master
+        uses: ros-tooling/action-ros-ci@master
         if: ${{ matrix.steps == 'action' }}
         with:
           package-name: examples_rclcpp_minimal_publisher
